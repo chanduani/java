@@ -1,1 +1,69 @@
+import java.util.*;
+public class MergeSort {
+    void merge(int a[], int left, int mid, int right) {
+// Find sizes of two subarrays to be merged
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+// Creating temp arrays//
+        int temp1[] = new int[n1];
+        int temp2[] = new int[n2];
+//Copying the data to temp arrays//
+        for (int i = 0; i < n1; ++i)
+            temp1[i] = a[left + i];
+        for (int j = 0; j < n2; ++j)
+            temp2[j] = a[mid + 1 + j];
+        int i = 0, j = 0;
+        int k = left;
+        while (i < n1 && j < n2) {
+            if (temp1[i] <= temp2[j]) {
+                a[k] = temp1[i];
+                i++;
+            }
+            else {
+                a[k] = temp2[j];
+                j++;}
+            k++;}
+//Copy remaining elements of temp1[]
+        while (i < n1) {
+            a[k] = temp1[i];
+            i++;
+            k++;
+        }
+// Copy remaining elements of temp2[]
+        while (j < n2) {
+            a[k] = temp2[j];
+            j++;
+            k++;
+        }
+    }
+    void mergesort(int arr[], int left, int right)
+    {
+        if (left < right) {
+// mid index
+            int mid =(left+right)/2;
+// Sort the left and right half
+            mergesort(arr, left, mid);
+            mergesort(arr, mid + 1, right);
+// Merge them
+            merge(arr, left, mid, right);
+        }
+    }
+    public static void main(String args[]) {
+        Scanner in= new Scanner(System.in);
+        int arr[]={6,8,1,5,9,2,6,3,47};
+        //No.of element in array;
+
+        System.out.println("The Array is");
+        for(int i=0;i<arr.length;i++){
+            System.out.print(arr[i]+" ");
+        }
+        System.out.println();
+        MergeSort m = new MergeSort();
+        m.mergesort(arr, 0, arr.length- 1);
+        System.out.println(" Sorted Array is:");
+        for(int i=0;i<arr.length;i++){
+            System.out.print(arr[i]+" ");
+        }
+    }
+}
 
